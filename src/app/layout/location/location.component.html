@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-md-4">
+        <label style="display: block;color: transparent;">0</label>
+        <button class="btn btn-sm bg-sunrise-red" (click)="openAnyModal('locationModal')">
+            New Location
+        </button>
+        &nbsp; &nbsp;
+        <button class="btn btn-sm bg-sunrise-red" (click)="exportLocation()" *ngIf="searchDataList.length != 0">
+            Export
+        </button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-borderd table-striped my-table">
+            <thead>
+                <tr>
+                    <th style="width: 120px;">V Id</th>
+                    <th style="width: 120px;">Mobile No</th>
+                    <th style="width: 200px">Location</th>
+                    <th style="width: 150px">Password</th>
+                    <th style="width: 150px">Action</th>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="text" class="form-control" placeholder="V Id" [(ngModel)]="searchVid"
+                        (keyup)="searchLocation($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Mobile No" [(ngModel)]="searchMobileNo"
+                        (keyup)="searchLocation($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Location" [(ngModel)]="searchLocName"
+                        (keyup)="searchLocation($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Password" [(ngModel)]="searchPassword"
+                        (keyup)="searchLocation($event)"/>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of searchDataList; let rowIndex = index" class="table-row data-{{rowIndex+1}}">
+                    <td>{{data.v_id}}</td>
+                    <td>
+                        <div class="nonEdit nonEdit{{data.v_id}}">{{data.mobile_no}}</div>
+                        <div class="edit edit{{data.v_id}}">
+                            <input type="text" id="mob{{data.v_id}}" class="form-control" [value]="data.mobile_no" [OnlyNumber]="true" maxlength="10"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="nonEdit nonEdit{{data.v_id}}">{{data.location}}</div>
+                        <div class="edit edit{{data.v_id}}">
+                            <input type="text" id="loc{{data.v_id}}" class="form-control" [value]="data.location"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="nonEdit nonEdit{{data.v_id}}">{{data.password}}</div>
+                        <div class="edit edit{{data.v_id}}">
+                            <input type="text" id="pass{{data.v_id}}" class="form-control" [value]="data.password"/>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="nonEdit nonEdit{{data.v_id}}">
+                            <i class="fa fa-pencil" aria-hidden="true" title="Edit this item" (click)="editLocation(data)"></i>
+                        </span>
+                        <span class="edit edit{{data.v_id}}">
+                            <i class="fa fa-floppy-o" aria-hidden="true" title="Save this item" (click)="submitLocation(data)"></i> &nbsp;
+                            <i class="fa fa-times-circle" aria-hidden="true" title="Cancel this item" (click)="cancelLocation(data)"></i>
+                        </span>
+                        
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-pagination *ngIf="searchDataList.length !=0" 
+    [itemCount]="searchDataList.length" 
+    [perPageRecord]="10" 
+    [showPage]="10">
+</app-pagination>
+
+<div id="locationModal" class="modal fade" role="dialog" data-keyboard="false" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<!-- <button class="btn btn-sm bg-sunrise-red" (click)="closeAnyModal('locationModal')">Close</button> -->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Mobile <span class="text-danger">*</span></label>
+                        <input type="text" [(ngModel)]="mobile" class="form-control resetField" [OnlyNumber]="true" maxlength="10"/>
+                    </div>
+                    <div class="col-md-12">
+                        <label>Location <span class="text-danger">*</span></label>
+                        <input type="text" [(ngModel)]="location" class="form-control resetField"/>
+                    </div>
+                    <div class="col-md-12">
+                        <label>Password <span class="text-danger">*</span></label>
+                        <input type="text" [(ngModel)]="password" class="form-control resetField"/>
+                    </div>
+                    <div class="col-md-12">
+                        <label style="display: block;color: transparent;">0</label>
+                        <button class="btn btn-sm bg-sunrise-red" (click)="saveLocation()">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

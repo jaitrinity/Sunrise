@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-md-4">
+        <label style="display: block;color: transparent;">0</label>
+        <button class="btn btn-sm bg-sunrise-red" (click)="openAnyModal('widModal')">
+            New WID
+        </button>
+        &nbsp; &nbsp;
+        <button class="btn btn-sm bg-sunrise-red" (click)="exportData()" *ngIf="searchDataList.length != 0">
+            Export
+        </button>
+    </div>
+    <div class="col-md-8">
+        <label style="display: block;color: transparent;">0</label>
+        <input [(ngModel)]="searchWid" class="form-control" placeholder="Search WID..." (keyup)="searchWhatsappId($event)" [OnlyNumber]="true" />
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-borderd table-striped my-table">
+            <thead>
+                <tr>
+                    <th>WID</th>
+                    <th>Template Name</th>
+                    <!-- <th>Status</th> -->
+                    <!-- <th>Action</th> -->
+                    <!-- <th>Template</th> -->
+                    <!-- <th style="width: 80px;">Action</th> -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of searchDataList; let rowIndex = index" class="table-row data-{{rowIndex+1}}">
+                    <td>{{data.wid}}</td>
+                    <td>{{data.templateName}}</td>
+                    <!-- <td>{{data.statusTxt}}</td> -->
+                    <!-- <th>
+                        <i class="fa fa-floppy-o" aria-hidden="true" title="Save this WID" (click)="changeStatus(data, 1)" *ngIf="data.status == 0"></i> &nbsp;
+                        <i class="fa fa-times-circle" aria-hidden="true" title="Cancel this WID" (click)="changeStatus(data, 0)" *ngIf="data.status == 1"></i>
+                    </th> -->
+                    <!-- <td>
+                        <div class="nonEdit nonEdit{{data.wid}}">{{data.template}}</div>
+                        <div class="edit edit{{data.wid}}">
+                            <textarea id="template{{data.wid}}" class="form-control" [value]="data.template"></textarea>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="nonEdit nonEdit{{data.wid}}">
+                            <i class="fa fa-pencil" aria-hidden="true" title="Edit this WID" (click)="editWid(data)"></i>
+                        </span>
+                        <span class="edit edit{{data.wid}}">
+                            <i class="fa fa-floppy-o" aria-hidden="true" title="Save this WID" (click)="submitWid(data)"></i> &nbsp;
+                            <i class="fa fa-times-circle" aria-hidden="true" title="Cancel this WID" (click)="cancelWid(data)"></i>
+                        </span>
+                    </td> -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-pagination *ngIf="searchDataList.length !=0" 
+    [itemCount]="searchDataList.length" 
+    [perPageRecord]="20" 
+    [showPage]="10">
+</app-pagination>
+
+<div id="widModal" class="modal fade" role="dialog" data-keyboard="false" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<!-- <button class="btn btn-sm bg-sunrise-red" (click)="closeAnyModal('widModal')">Close</button> -->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>WID <span class="text-danger">*</span></label>
+                        <input type="text" [(ngModel)]="wid" class="form-control resetField" [OnlyNumber]="true"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Template Name <span class="text-danger">*</span></label>
+                        <input type="text" [(ngModel)]="templateName" class="form-control resetField"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- <div class="col-md-12">
+                        <label>Template <span class="text-danger">*</span></label>
+                        <textarea [(ngModel)]="template" class="form-control resetField"></textarea>
+                    </div> -->
+                    <div class="col-md-12">
+                        <label style="display: block;color: transparent;">0</label>
+                        <button class="btn btn-sm bg-sunrise-red" (click)="saveWid()">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

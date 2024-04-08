@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-md-4">
+        <label style="display: block;color: transparent;">0</label>
+        <button class="btn btn-sm bg-sunrise-red" (click)="openAnyModal('widModal')">
+            Scheduler WID
+        </button>
+        <!-- &nbsp; &nbsp;
+        <button class="btn btn-sm bg-sunrise-red" (click)="exportData()" *ngIf="searchDataList.length != 0">
+            Export
+        </button> -->
+    </div>
+    <div class="col-md-8">
+        <label style="display: block;color: transparent;">0</label>
+        <input [(ngModel)]="searchWid" class="form-control" placeholder="Search WID..." (keyup)="searchWhatsappId($event)" [OnlyNumber]="true" />
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-borderd table-striped my-table">
+            <thead>
+                <tr>
+                    <th style="width: 80px;">WID</th>
+                    <th style="width: 800px;">Location</th>
+                    <th>Schedule Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of searchDataList; let rowIndex = index" class="table-row data-{{rowIndex+1}}">
+                    <!-- <tr *ngFor="let data of searchDataList; let rowIndex = index"> -->
+                    <td>{{data.WID}}</td>
+                    <td>{{data.Location}}</td>
+                    <td>
+                        {{data.ScheduleDate}}
+                    </td>
+                   
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<app-pagination *ngIf="searchDataList.length !=0" 
+    [itemCount]="searchDataList.length" 
+    [perPageRecord]="20" 
+    [showPage]="10">
+</app-pagination>
+
+<div id="widModal" class="modal fade" role="dialog" data-keyboard="false" data-bs-backdrop="static">
+    <div class="modal-dialog modal-md" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				<!-- <button type="button" class="btn btn-sm bg-sunrise-red" (click)="closeAnyModal('widModal')">Close</button> -->
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>WID <span class="text-danger">*</span></label>
+                        <select [(ngModel)]="wid" class="form-control resetField">
+                            <option value="">Select</option>
+                            <option [value]="wid.wid" *ngFor="let wid of widList">{{wid.wid}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Location <span class="text-danger">*</span></label>
+                        <!-- <select [(ngModel)]="location" class="form-control resetField">
+                            <option value="">Select</option>
+                            <option [value]="loc.location" *ngFor="let loc of locationList">{{loc.location}}</option>
+                        </select> -->
+                        <ng-multiselect-dropdown
+                        [placeholder]="'Select Location'"
+                        [settings]="multiselectSettings"
+                        [data]="locationList"
+                        [(ngModel)]="selectedLocationList"
+                        (onSelect)="onItemSelect($event)"
+                        (onSelectAll)="onSelectAll($event)"
+                        >
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Date <span class="text-danger">*</span></label>
+                        <input type="date" [min]="nextDate" [(ngModel)]="schedulerDate" class="form-control resetField"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label style="display: block;color: transparent;">0</label>
+                        <button class="btn btn-sm bg-sunrise-red" (click)="scheduleWid()">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

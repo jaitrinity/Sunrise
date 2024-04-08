@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-4">
+        <label style="display: block;color: transparent;">0</label>
+        <!-- <button class="btn btn-sm bg-sunrise-red" (click)="openAnyModal('widModal')">
+            New WID
+        </button>
+        &nbsp; &nbsp; -->
+        <button class="btn btn-sm bg-sunrise-red" (click)="exportData()" *ngIf="searchDataList.length != 0">
+            Export
+        </button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-borderd table-striped my-table">
+            <thead>
+                <tr>
+                    <th>Sms Id</th>
+                    <th>WID</th>
+                    <th>Location</th>
+                    <th>Send To</th>
+                    <th>Date</th>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Sms Id" [(ngModel)]="searchSmsId"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="WID" [(ngModel)]="searchMessage"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Location" [(ngModel)]="searchLocation"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Send To" [(ngModel)]="searchSendTo"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Date" [(ngModel)]="searchDate"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of searchDataList; let rowIndex = index" class="table-row data-{{rowIndex+1}}">
+                    <td>{{data.sms_id}}</td>
+                    <td>{{data.message}}</td>
+                    <td>{{data.location}}</td>
+                    <td>{{data.sent_to}}</td>
+                    <td>{{data.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-pagination *ngIf="searchDataList.length !=0" 
+    [itemCount]="searchDataList.length" 
+    [perPageRecord]="20" 
+    [showPage]="10">
+</app-pagination>

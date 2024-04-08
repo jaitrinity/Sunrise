@@ -1,0 +1,25 @@
+@import "../../sunrise";
+.unselectable{
+    margin: 10px 0px;
+    list-style-type: none;
+    padding: 0px;
+    height: 50%;
+    overflow: auto;
+}
+.unselectable li{
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+    border-bottom: 1px solid white;
+    border-radius: 5px;
+}
+.unselectable li:hover{
+    background: $sunriseRed;
+}
+.activeRoute{
+    background-color: $sunriseRed;
+}

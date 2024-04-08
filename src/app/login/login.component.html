@@ -1,0 +1,67 @@
+<!-- <div class="parent">
+    <div class="row form-field">
+        <form #loginForm="ngForm" (ngSubmit)="login()">
+            <div class="col-md-12 text-center">
+                <img src="assets/img/sunrise.webp">
+            </div>
+            <br>
+            <div class="col-md-12">
+                <label class="text-sunrise-red">Username</label>
+                <input type="text" [(ngModel)]="loginModel.username" placeholder="Username" required 
+                class="form-control" name="username"/>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <label class="text-sunrise-red">Password</label>
+                <input type="password" [(ngModel)]="loginModel.password" placeholder="Password" required 
+                class="form-control" name="password"/>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <button class="btn btn-sm btn-default" [disabled]='loginForm.form.invalid' [class.activebutton]='!loginForm.form.invalid'>Login</button>
+            </div>
+        </form>
+    </div>
+</div> -->
+
+<div class="parent">
+    <div class="row form-field">
+        <div class="col-md-12">
+            <form #loginForm="ngForm" (ngSubmit)="login()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <img src="assets/img/sunrise.webp">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <h5 class="text-sunrise-red"> Welcome Back !</h5>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <label class="text-sunrise-red"><i class="fa fa-user" aria-hidden="true"></i> Username <span class="text-danger">*</span></label>
+                                <input type="text" [(ngModel)]="loginModel.username" placeholder="Username" required 
+                                class="form-control" name="username"/>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                                <label class="text-sunrise-red"><i class="fa fa-key"></i> Password <span class="text-danger">*</span></label>
+                                <input type="password" [(ngModel)]="loginModel.password" placeholder="Password" required 
+                                class="form-control" name="password"/>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-sm btn-default" [disabled]='loginForm.form.invalid' [class.activebutton]='!loginForm.form.invalid'>
+                                    <i class="fa fa-lock"></i> Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </form>
+        </div>
+        
+    </div>
+</div>
+

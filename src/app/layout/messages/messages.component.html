@@ -1,0 +1,103 @@
+<div class="row">
+    <div class="col-md-4">
+        <label style="display: block;color: transparent;">0</label>
+        <button class="btn btn-sm bg-sunrise-red" (click)="openAnyModal('widModal')">
+            New WID
+        </button>
+        &nbsp; &nbsp;
+        <button class="btn btn-sm bg-sunrise-red" (click)="exportData()" *ngIf="searchDataList.length != 0">
+            Export
+        </button>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-borderd table-striped my-table">
+            <thead>
+                <tr>
+                    <th style="width: 80px;">M Id</th>
+                    <th>Category</th>
+                    <th>Message</th>
+                    <th>Location</th>
+                    <th>Date From</th>
+                    <th>Date To</th>
+                    <th>Date</th>
+                </tr>
+                <!-- <tr>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Sms Id" [(ngModel)]="searchSmsId"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Message" [(ngModel)]="searchMessage"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Location" [(ngModel)]="searchLocation"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Send To" [(ngModel)]="searchSendTo"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                    <th>
+                        <input type="text" class="form-control" placeholder="Date" [(ngModel)]="searchDate"
+                        (keyup)="searchSmsLog($event)"/>
+                    </th>
+                </tr> -->
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of searchDataList; let rowIndex = index" class="table-row data-{{rowIndex+1}}">
+                    <td>{{data.m_id}}</td>
+                    <td>{{data.category}}</td>
+                    <td>{{data.message}}</td>
+                    <td>{{data.location}}</td>
+                    <td>{{data.date_from}}</td>
+                    <td>{{data.date_to}}</td>
+                    <td>{{data.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-pagination *ngIf="searchDataList.length !=0" 
+    [itemCount]="searchDataList.length" 
+    [perPageRecord]="20" 
+    [showPage]="10">
+</app-pagination>
+
+<div id="widModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+				<button class="btn btn-sm bg-sunrise-red" (click)="closeAnyModal('widModal')">Close</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>WID <span class="text-danger">*</span></label>
+                        <input type="text" [(ngModel)]="wid" class="form-control resetField" [OnlyNumber]="true"/>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Template Name <span class="text-danger">*</span></label>
+                        <input type="text" [(ngModel)]="templateName" class="form-control resetField"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Template <span class="text-danger">*</span></label>
+                        <textarea [(ngModel)]="template" class="form-control resetField"></textarea>
+                    </div>
+                    <div class="col-md-12">
+                        <label style="display: block;color: transparent;">0</label>
+                        <button class="btn btn-sm bg-sunrise-red" (click)="saveWid()">Save</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
