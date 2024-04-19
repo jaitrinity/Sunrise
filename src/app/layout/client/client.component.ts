@@ -52,10 +52,25 @@ export class ClientComponent {
     })
   }
 
+  searchMobile: any ="";
+  searchClient(evt:any){
+    this.searchDataList = this.dataList.filter
+    (
+      (x: 
+        { 
+          mobile: any;
+        }
+      ) => 
+      x.mobile.toLowerCase().includes(this.searchMobile.toLowerCase())
+    );
+    this.myPagination.itemCount = this.searchDataList.length;
+    this.myPagination.createPagination();
+  }
+
   exportData(){
     if(this.searchDataList.length != 0 ){
-      let columnKeyArr:any = ["cf_id","mobile","name","email","amount","full_name","dob","gender","married","address","location","send_message","date"];
-      let columnTitleArr:any = ["Cf id","Mobile","Name","Email","Amount","Full Name","DOB","Gender","Married","Address","Location","Send Message","Date"];
+      let columnKeyArr:any = ["cf_id","mobile","name","email","amount","dob","gender","married","address","location","send_message","date"];
+      let columnTitleArr:any = ["Cf id","Mobile","Name","Email","Amount","DOB","Gender","Married","Address","Location","Send Message","Date"];
       CommonFunction.downloadFile(this.searchDataList,
         'Client.csv', 
         columnKeyArr, 

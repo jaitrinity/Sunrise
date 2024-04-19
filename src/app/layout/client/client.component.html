@@ -17,6 +17,10 @@
             Export
         </button>
     </div>
+    <div class="col-md-4">
+        <label style="display: block;color: transparent;">0</label>
+        <input [(ngModel)]="searchMobile" class="form-control" placeholder="Search Mobile..." (keyup)="searchClient($event)" [OnlyNumber]="true" />
+    </div>
 </div>
 <br>
 <div class="row">
@@ -29,7 +33,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Amount</th>
-                    <th>Full name</th>
+                    <!-- <th>Full name</th> -->
                     <th>Dob</th>
                     <th>Gender</th>
                     <th>Married</th>
@@ -38,28 +42,6 @@
                     <th>Send message</th>
                     <th>Date</th>
                 </tr>
-                <!-- <tr>
-                    <th>
-                        <input type="text" class="form-control" placeholder="Sms Id" [(ngModel)]="searchSmsId"
-                        (keyup)="searchSmsLog($event)"/>
-                    </th>
-                    <th>
-                        <input type="text" class="form-control" placeholder="Message" [(ngModel)]="searchMessage"
-                        (keyup)="searchSmsLog($event)"/>
-                    </th>
-                    <th>
-                        <input type="text" class="form-control" placeholder="Location" [(ngModel)]="searchLocation"
-                        (keyup)="searchSmsLog($event)"/>
-                    </th>
-                    <th>
-                        <input type="text" class="form-control" placeholder="Send To" [(ngModel)]="searchSendTo"
-                        (keyup)="searchSmsLog($event)"/>
-                    </th>
-                    <th>
-                        <input type="text" class="form-control" placeholder="Date" [(ngModel)]="searchDate"
-                        (keyup)="searchSmsLog($event)"/>
-                    </th>
-                </tr> -->
             </thead>
             <tbody>
                 <tr *ngFor="let data of searchDataList; let rowIndex = index" class="table-row data-{{rowIndex+1}}">
@@ -68,7 +50,7 @@
                     <td>{{data.name}}</td>
                     <td>{{data.email}}</td>
                     <td>{{data.amount}}</td>
-                    <td>{{data.full_name}}</td>
+                    <!-- <td>{{data.full_name}}</td> -->
                     <td>{{data.dob}}</td>
                     <td>{{data.gender}}</td>
                     <td>{{data.married}}</td>
